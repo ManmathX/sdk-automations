@@ -1,0 +1,23 @@
+name: "PR Review Workflow Automator"
+description: "A stateless, cron-based workflow action that scans PRs and routes review assignments based on difficulty and roles."
+author: "Hiero"
+inputs:
+  github-token:
+    description: "GitHub Token for the repository (must have write access)"
+    required: true
+  junior-reviewers:
+    description: "Comma-separated list of GitHub handles for Junior Committers"
+    required: true
+    default: ""
+  committer-reviewers:
+    description: "Comma-separated list of GitHub handles for Committers"
+    required: true
+    default: ""
+  maintainer-reviewers:
+    description: "Comma-separated list of GitHub handles for Maintainers"
+    required: true
+    default: ""
+
+runs:
+  using: "node20"
+  main: "dist/index.js"

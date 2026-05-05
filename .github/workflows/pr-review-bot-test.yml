@@ -1,0 +1,25 @@
+name: "PR Review Bot Test"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+
+jobs:
+  run-review-bot:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run PR Review Bot
+        uses: ./.github/actions/pr-review-bot
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          junior-reviewers: "junior1,junior2"
+          committer-reviewers: "committer1,committer2"
+          maintainer-reviewers: "maintainer1,maintainer2"
